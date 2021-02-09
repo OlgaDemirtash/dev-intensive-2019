@@ -32,7 +32,7 @@ fun Date.add(value: Int, units: TimeUnits = TimeUnits.SECOND): Date {
 enum class TimeUnits {
     SECOND {
         override fun plural(number: Int): String = "${abs(number)} ${when (number.toString().takeLast(1).toInt()) {
-            1 -> "секунда"
+            1 -> "секунду"
             in 2..4 -> "секунды"
             in 5..9, 0 -> "секунд"
 
@@ -42,7 +42,7 @@ enum class TimeUnits {
 
     MINUTE {
         override fun plural(number: Int): String = "${abs(number)} ${when (number.toString().takeLast(1).toInt()) {
-            1 -> "минута"
+            1 -> "минуту"
             in 2..4 -> "минуты"
             in 5..9, 0 -> "минут"
 

@@ -32,7 +32,7 @@ data class User(
         fun makeUser(fullName: String?): User {
             lastId++
             if (!fullName.isNullOrBlank()) {
-                val parts: List<String>? = fullName?.split(" ")
+
 
                 val (firstName, lastName) = Utils.parseFullName(fullName)
 

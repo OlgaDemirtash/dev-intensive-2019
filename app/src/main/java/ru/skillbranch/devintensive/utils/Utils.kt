@@ -11,8 +11,8 @@ object Utils {
 
         val firstName =  parts?.getOrNull(0)
         var lastName =    parts?.getOrNull(1)
-        return Pair(firstName, lastName)
-        //return  firstName to lastName
+        //return Pair(firstName, lastName)
+        return  firstName to lastName
     }
 
 
