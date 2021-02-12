@@ -28,16 +28,16 @@ abstract class BaseMessage(
                     from,
                     chat,
                     date = date,
-                    image = payload as String,
-                    isIncoming = isIncoming
+                    image = payload as String
+
                 )
                 else -> TextMessage(
                     "$lastId",
                     from,
                     chat,
                     date = date,
-                    text = payload as String,
-                    isIncoming = isIncoming
+                    text = payload as String
+
                 )
             }
         }

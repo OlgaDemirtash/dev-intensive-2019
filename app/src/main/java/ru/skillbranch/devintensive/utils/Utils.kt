@@ -96,21 +96,39 @@ object Utils {
 
 
     fun toInitials(firstName: String?, lastName: String?): String? {
-     var fName: String? = null
-     var lName: String? = null
-        var retVal:String? = null
+//     var fName: String? = null
+//     var lName: String? = null
+//        var retVal:String? = null
+//
+//        if (firstName != "" && firstName != null && firstName != " ") {
+//      fName = firstName.trimStart().toUpperCase().getOrNull(0).toString()
+//        retVal = fName}
+//
+//        if (lastName != "" && lastName != null && lastName != null) {
+//            lName = lastName.trimStart().toUpperCase().getOrNull(0).toString()
+//            retVal = retVal + lName }
+//
+//
+//
+//      return  "$retVal"
 
-        if (firstName != "" && firstName != null && firstName != " ") {
-      fName = firstName.trimStart().toUpperCase().getOrNull(0).toString()
-        retVal = fName}
-
-        if (lastName != "" && lastName != null && lastName != null) {
-            lName = lastName.trimStart().toUpperCase().getOrNull(0).toString()
-            retVal = retVal + lName }
-
-
-
-      return  "$retVal"
+        val first: Char? = if (firstName?.length != 0) firstName?.get(0) else null
+        val last: Char? = if (lastName?.length != 0) lastName?.get(0) else null
+        return when {
+            first == null && last == null -> null
+            first == null && last != null -> if (last.isLetter()) last.toUpperCase() else null
+            first != null && last == null -> if (first.isLetter()) first.toUpperCase() else null
+            first != null && last != null -> when {
+                first.isLetter() && last.isLetter() ->
+                    first.toUpperCase().toString() + last.toUpperCase().toString()
+                first.isLetter() && !last.isLetter() ->
+                    first.toUpperCase()
+                !first.isLetter() && last.isLetter() ->
+                    last.toUpperCase()
+                else -> null
+            }
+            else -> null
+        }.toString()
     }
 
 
