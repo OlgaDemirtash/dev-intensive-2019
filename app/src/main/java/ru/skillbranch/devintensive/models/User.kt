@@ -13,6 +13,13 @@ data class User(
     val lastVisit: Date? = Date(),
     val isOnline: Boolean = false
 ) {
+    private constructor(id: String, firstName: String?, lastName: String?) : this(
+        id = id,
+        firstName = firstName,
+        lastName = lastName,
+        avatar = null
+    )
+
     data class Builder(
         var id: String,
         var firstName: String? = null,
@@ -38,12 +45,7 @@ data class User(
         fun build() = User(id, firstName, lastName, avatar, rating, respect, lastVisit, isOnline)
     }
 
-    private constructor(id: String, firstName: String?, lastName: String?) : this(
-        id = id,
-        firstName = firstName,
-        lastName = lastName,
-        avatar = null
-    )
+
 
     constructor(id: String) : this(id, "John", "Doe")
 
