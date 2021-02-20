@@ -34,6 +34,11 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
             }
         }
 
+//
+//    fun validateAnswear(answear:String):String =
+//        when ( question ) {
+//            Question.NAME -> if (answear.
+//        }
 
     enum class Status(val color: Triple<Int, Int, Int>) {
         NORMAL(Triple(255, 255, 255)),
