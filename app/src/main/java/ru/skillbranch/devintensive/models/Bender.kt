@@ -22,7 +22,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
             {val valStr = validateAnswear(answear)
             status = Status.NORMAL
             question = question.nextQuestion()
-            "{$valStr\n${question.question}" to status.color}
+            "$valStr\n${question.question}" to status.color}
         } else {
             negIdx += 1
             if (negIdx > 3) {
