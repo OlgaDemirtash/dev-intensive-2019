@@ -34,10 +34,11 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
             }
         }
 
-//
+
 //    fun validateAnswear(answear:String):String =
 //        when ( question ) {
-//            Question.NAME -> if (answear.
+//            Question.NAME -> if (answear[0].isUpperCase()) "" else "Имя должно начинаться с заглавной буквы"
+//            Q
 //        }
 
     enum class Status(val color: Triple<Int, Int, Int>) {
