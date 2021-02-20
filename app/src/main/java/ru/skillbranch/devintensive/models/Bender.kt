@@ -18,10 +18,11 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
             if (question == Question.IDLE) {
 
                 "${validateAnswear(answear)}\nНа этом все, вопросов больше нет" to status.color
-            }
+            } else
+            {val valStr = validateAnswear(answear)
             status = Status.NORMAL
             question = question.nextQuestion()
-            "{${validateAnswear(answear)}\n${question.question}" to status.color
+            "{$valStr\n${question.question}" to status.color}
         } else {
             negIdx += 1
             if (negIdx > 3) {
