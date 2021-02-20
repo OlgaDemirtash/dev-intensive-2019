@@ -52,23 +52,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 
 
-                messageEt.setOnEditorActionListener { v, actionId, event ->
-                    Log.d("M_MainActivity", "setOnEditorActionListener")
-                    if(actionId == EditorInfo.IME_ACTION_DONE){
+        messageEt.setOnEditorActionListener { v, actionId, event ->
+            Log.d("M_MainActivity", "setOnEditorActionListener")
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
 
-                    val (phrase, color) = benderObj.listenAnswear(messageEt.text.toString().toLowerCase())
-                    messageEt.setText("")
-                    val (r, g, b) = color
-                    benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
-                    textTxt.text = phrase
-                    hideKeyboard()
+                val (phrase, color) = benderObj.listenAnswear(messageEt.text.toString().toLowerCase())
+                messageEt.setText("")
+                val (r, g, b) = color
+                benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
+                textTxt.text = phrase
+                hideKeyboard()
 
-                    true
-                } else {
-                    false
-                }
+                true
+            } else {
+                false
             }
-
+        }
 
 
     }
@@ -127,7 +126,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
-
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString("STATUS", benderObj.status.name)
@@ -136,32 +134,36 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         Log.d("M_MainActivity", "On Save Instance Save: ${benderObj.status.name} ${benderObj.question.name}")
     }
 
-    fun Activity.hideKeyboard() {
-        val view: View = currentFocus ?: View(this)
-        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
-    }
-    // Add these extension functions to an empty kotlin file
-    fun Activity.getRootView(): View {
-        return findViewById<View>(android.R.id.content)
-    }
-    fun Context.convertDpToPx(dp: Float): Float {
-        return TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            dp,
-            this.resources.displayMetrics
-        )
-    }
-    fun Activity.isKeyboardOpen(): Boolean {
-        val visibleBounds = Rect()
-        this.getRootView().getWindowVisibleDisplayFrame(visibleBounds)
-        val heightDiff = getRootView().height - visibleBounds.height()
-        val marginOfError = Math.round(this.convertDpToPx(50F))
-        return heightDiff > marginOfError
-    }
 
-    fun Activity.isKeyboardClosed(): Boolean {
-        return !this.isKeyboardOpen()
-    }
+}
 
+// Add these extension functions to an empty kotlin file
+fun Activity.getRootView(): View {
+    return findViewById<View>(android.R.id.content)
+}
+
+fun Context.convertDpToPx(dp: Float): Float {
+    return TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        dp,
+        this.resources.displayMetrics
+    )
+}
+
+fun Activity.isKeyboardOpen(): Boolean {
+    val visibleBounds = Rect()
+    this.getRootView().getWindowVisibleDisplayFrame(visibleBounds)
+    val heightDiff = getRootView().height - visibleBounds.height()
+    val marginOfError = Math.round(this.convertDpToPx(50F))
+    return heightDiff > marginOfError
+}
+
+fun Activity.isKeyboardClosed(): Boolean {
+    return !this.isKeyboardOpen()
+}
+
+fun Activity.hideKeyboard() {
+    val view: View = currentFocus ?: View(this)
+    val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 }

@@ -2,6 +2,7 @@ package ru.skillbranch.devintensive.models
 
 class Bender(var status: Status = Status.NORMAL, var question: Question = Question.NAME) {
     var negIdx = 0
+    val regex = Regex(pattern = """\d+""")
     fun askQuestion(): String = when (question) {
         Question.NAME -> Question.NAME.question
         Question.PROFESSION -> Question.PROFESSION.question
@@ -16,11 +17,11 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         if (question.answers.contains(answear)) {
             if (question == Question.IDLE) {
 
-                "Отлично - ты справился\nНа этом все, вопросов больше нет" to status.color
+                "${validateAnswear(answear)}\nНа этом все, вопросов больше нет" to status.color
             }
             status = Status.NORMAL
             question = question.nextQuestion()
-            "Отлично - ты справился\n${question.question}" to status.color
+            "{${validateAnswear(answear)}\n${question.question}" to status.color
         } else {
             negIdx += 1
             if (negIdx > 3) {
@@ -35,11 +36,15 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         }
 
 
-//    fun validateAnswear(answear:String):String =
-//        when ( question ) {
-//            Question.NAME -> if (answear[0].isUpperCase()) "" else "Имя должно начинаться с заглавной буквы"
-//            Q
-//        }
+    fun validateAnswear(answear: String): String =
+        when (question) {
+            Question.NAME -> if (answear[0].isUpperCase()) "Отлично - ты справился" else "Имя должно начинаться с заглавной буквы"
+            Question.PROFESSION -> if (answear[0].isLowerCase()) "Отлично - ты справился"  else "Профессия должна начинаться со строчной буквы"
+            Question.MATERIAL -> if (regex.containsMatchIn(answear)) "Материал не должен содержать цифр" else "Отлично - ты справился"
+            Question.BDAY -> if (regex.matches(answear)) "Отлично - ты справился"  else "Год моего рождения должен содержать только цифры"
+            Question.SERIAL -> if (regex.matches(answear) && answear.length == 7) "Отлично - ты справился"  else "Серийный номер содержит только цифры, и их 7"
+            Question.IDLE -> "Отлично - ты справился"
+        }
 
     enum class Status(val color: Triple<Int, Int, Int>) {
         NORMAL(Triple(255, 255, 255)),
