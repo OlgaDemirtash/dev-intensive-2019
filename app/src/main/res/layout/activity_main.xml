@@ -47,6 +47,8 @@
                    android:layout_width="@dimen/spacing_large_24"
                    android:layout_height="@dimen/spacing_large_24"
                    android:src="@drawable/ic_send_black_24dp"
+                   android:layout_marginLeft="@dimen/spacing_large_24"
+                   android:layout_marginRight="@dimen/spacing_large_24"
         />
 
     </LinearLayout>
