@@ -116,19 +116,19 @@ object Utils {
         val last: Char? = if (lastName?.length != 0) lastName?.get(0) else null
         return when {
             first == null && last == null -> null
-            first == null && last != null -> if (last.isLetter()) last.toUpperCase() else null
-            first != null && last == null -> if (first.isLetter()) first.toUpperCase() else null
+            first == null && last != null -> if (last.isLetter()) last.toUpperCase().toString() else null
+            first != null && last == null -> if (first.isLetter()) first.toUpperCase().toString() else null
             first != null && last != null -> when {
                 first.isLetter() && last.isLetter() ->
                     first.toUpperCase().toString() + last.toUpperCase().toString()
                 first.isLetter() && !last.isLetter() ->
-                    first.toUpperCase()
+                    first.toUpperCase().toString()
                 !first.isLetter() && last.isLetter() ->
-                    last.toUpperCase()
+                    last.toUpperCase().toString()
                 else -> null
             }
             else -> null
-        }.toString()
+        }
     }
 
 
